@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>비전 공방 — 나는 어떤 사람이 되고 싶은가</title>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1d2340;--ink2:#555b7c;--paper:#fbf7ef;--card:#fff;--line:#e8e0cd;--gold:#e0a23a;--gold2:#f8dc9c;--teal:#2a9d8f;--red:#e76f51;--soft:#f4efe3}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Noto Sans KR',system-ui,-apple-system,'Malgun Gothic',sans-serif;color:var(--ink);background:var(--paper);background-image:radial-gradient(circle at 8% 0%,#fff1cf 0,transparent 38%),radial-gradient(circle at 100% 25%,#ebe7ff 0,transparent 32%),radial-gradient(circle at 50% 100%,#dff3ef 0,transparent 40%);background-attachment:fixed;min-height:100vh}
+button{font-family:inherit;cursor:pointer}
+input,textarea,select{font-family:inherit;font-size:15px;color:var(--ink)}
+.serif{font-family:'Gowun Batang',serif}
+
+/* 상단 */
+header{position:sticky;top:0;z-index:20;background:rgba(251,247,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hwrap{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:8px;font-weight:900;font-size:18px;letter-spacing:-.5px}
+.logo small{font-weight:500;color:var(--ink2);font-size:12px;letter-spacing:0}
+.info{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-left:auto;font-size:13px}
+.info input{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 8px;font-size:13px}
+.info .w1{width:52px}.info .w2{width:96px}
+.tools{display:flex;gap:6px}
+.tbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;color:var(--ink)}
+.tbtn:hover{border-color:var(--ink)}
+nav{max-width:1180px;margin:0 auto;padding:0 16px 10px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.nb{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:13px;color:var(--ink2);display:flex;gap:6px;align-items:center}
+.nb .d{width:20px;height:20px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-size:11px;font-weight:700}
+.nb.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.nb.on .d{background:var(--gold);color:var(--ink)}
+.nb.done .d{background:var(--teal);color:#fff}
+
+main{max-width:1180px;margin:0 auto;padding:22px 16px 80px}
+.step{display:none;animation:rise .45s ease}
+.step.on{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.shead{display:flex;align-items:flex-end;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.snum{font-family:'Gowun Batang',serif;font-size:56px;line-height:.9;color:var(--gold);font-weight:700}
+.stitle h2{margin:0;font-size:26px;letter-spacing:-.6px}
+.stitle p{margin:4px 0 0;color:var(--ink2);font-size:14px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 6px 24px -14px rgba(29,35,64,.25)}
+.grid2{display:grid;grid-template-columns:1.25fr 1fr;gap:18px}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}}
+label.lb{display:block;font-weight:700;font-size:14px;margin:12px 0 6px}
+label.lb small{font-weight:400;color:var(--ink2)}
+.inp,textarea.inp{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:#fffdf8;outline:none;transition:.2s}
+.inp:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(224,162,58,.15);background:#fff}
+textarea.inp{resize:vertical;min-height:84px;line-height:1.6}
+.hint{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.hint button{border:1px dashed #cdbf9f;background:#fffaf0;border-radius:999px;padding:4px 10px;font-size:12px;color:var(--ink2)}
+.hint button:hover{background:var(--gold2);color:var(--ink);border-style:solid}
+.navrow{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.btn{border:none;border-radius:12px;padding:12px 20px;font-weight:700;font-size:15px;background:var(--ink);color:#fff;transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px -8px rgba(29,35,64,.6)}
+.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn.gold{background:var(--gold);color:var(--ink)}
+.btn.teal{background:var(--teal)}
+
+/* 인트로 */
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center}
+@media (max-width:900px){.hero{grid-template-columns:1fr}}
+.hero h1{font-family:'Gowun Batang',serif;font-size:44px;line-height:1.25;margin:0 0 12px;letter-spacing:-1px}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 60%,var(--gold2) 60%)}
+.hero p{color:var(--ink2);line-height:1.8;font-size:16px}
+.journey{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:26px}
+@media (max-width:900px){.journey{grid-template-columns:repeat(2,1fr)}}
+.jc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;transition:.2s}
+.jc:hover{transform:translateY(-3px);border-color:var(--gold)}
+.jc b{display:block;font-size:22px;margin-bottom:4px}
+.jc span{font-size:13px;color:var(--ink2);line-height:1.5}
+.bigcompass{width:min(360px,80vw);margin:auto;display:block;filter:drop-shadow(0 18px 30px rgba(29,35,64,.18))}
+.spin{animation:wobble 6s ease-in-out infinite;transform-origin:110px 110px}
+@keyframes wobble{0%{transform:rotate(-30deg)}25%{transform:rotate(60deg)}50%{transform:rotate(20deg)}75%{transform:rotate(150deg)}100%{transform:rotate(-30deg)}}
+
+/* STEP1 */
+.vgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:900px){.vgrid{grid-template-columns:repeat(2,1fr)}}
+.vcol{border-radius:16px;padding:12px;background:var(--soft)}
+.vcol h4{margin:0 0 2px;font-size:15px;display:flex;align-items:center;gap:6px}
+.vcol h4 i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.vcol .cd{font-size:12px;color:var(--ink2);margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.vchip{position:relative;border:1.5px solid transparent;background:#fff;border-radius:999px;padding:7px 12px;font-size:14px;font-weight:500;transition:.15s;color:var(--ink)}
+.vchip:hover{transform:translateY(-2px);border-color:var(--cc)}
+.vchip.on{background:var(--cc);color:#fff;box-shadow:0 0 0 3px #fff,0 0 0 5px var(--cc)}
+.vchip .rk{position:absolute;top:-8px;right:-6px;background:var(--gold);color:var(--ink);border-radius:999px;font-size:10px;padding:1px 5px;font-weight:900}
+.vdesc{min-height:24px;margin:10px 2px 0;font-size:13px;color:var(--ink2)}
+.vdesc b{color:var(--ink)}
+.counter{font-weight:900;font-size:13px;background:var(--ink);color:#fff;border-radius:999px;padding:3px 10px}
+.tray{display:flex;flex-wrap:wrap;gap:8px;min-height:44px;padding:10px;border:2px dashed var(--line);border-radius:14px;background:#fffdf8}
+.tray .tchip{border:none;border-radius:10px;padding:8px 12px;color:#fff;font-weight:700;font-size:14px;cursor:grab}
+.tray .tchip.used{opacity:.35}
+.tray .empty{color:#b3aa95;font-size:13px;align-self:center}
+.pyr{display:flex;flex-direction:column;align-items:center;gap:8px;margin:14px 0 4px;position:relative}
+.pyr .row{display:flex;gap:8px}
+.slot{width:150px;height:70px;border-radius:14px;border:2px dashed #cbbf9f;background:#fffaf0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;color:#a69a7c;transition:.2s;cursor:pointer;text-align:center}
+.slot.s1{width:190px;height:84px;clip-path:polygon(14% 0,86% 0,100% 100%,0 100%);border:none;background:#f3e7c9}
+.slot.over{background:var(--gold2)}
+.slot.f{border-style:solid;color:#fff}
+.slot.f b{font-size:18px}
+.slot.s1.f{background:linear-gradient(135deg,#e0a23a,#f2c56b);color:var(--ink)}
+.slot.s1.f b{font-size:21px}
+.compwrap{display:flex;gap:16px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.compwrap svg{width:180px;flex:0 0 auto}
+.compmsg{flex:1;min-width:200px}
+.compmsg h4{margin:0 0 6px;font-family:'Gowun Batang',serif;font-size:20px}
+.compmsg p{margin:0;font-size:14px;color:var(--ink2);line-height:1.6}
+#needle{transform-origin:110px 110px;transition:transform 1.4s cubic-bezier(.3,1.7,.5,1)}
+
+/* STEP2 */
+.morph{background:linear-gradient(160deg,#1d2340,#33397a);color:#fff;border-radius:18px;padding:22px;position:sticky;top:130px}
+.noun{font-size:17px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.08);position:relative}
+.noun.strike::after{content:'';position:absolute;left:10px;right:10px;top:50%;height:2px;background:var(--red);animation:strike .6s ease forwards;transform-origin:left}
+@keyframes strike{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.arrow{text-align:center;font-size:12px;color:#c9c7f3;margin:10px 0;letter-spacing:2px}
+.verb{font-family:'Gowun Batang',serif;font-size:21px;line-height:1.9}
+.fl{padding:1px 6px;border-radius:6px;font-family:'Noto Sans KR',sans-serif;font-size:16px;font-weight:700}
+.fl.e{background:rgba(255,255,255,.08);color:#9a98c9;font-weight:400}
+.fl.p{background:#ef7aa1;color:#fff}.fl.v{background:var(--gold);color:var(--ink)}.fl.a{background:#2a9d8f;color:#fff}
+.morph .tag{display:inline-block;font-size:11px;background:rgba(255,255,255,.12);padding:2px 8px;border-radius:999px;margin-bottom:8px}
+
+/* STEP3 */
+.year{font-family:'Gowun Batang',serif;font-size:20px;margin:0 0 14px;color:var(--ink2)}
+.year b{color:var(--ink);font-size:26px}
+.scenes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:900px){.scenes{grid-template-columns:1fr}}
+.scene{border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#fff;display:flex;flex-direction:column}
+.sky{height:130px;position:relative;overflow:hidden}
+.sky .sun{position:absolute;width:46px;height:46px;border-radius:50%;box-shadow:0 0 40px 14px rgba(255,220,120,.7)}
+.sky .hill{position:absolute;bottom:-40px;left:-10%;width:120%;height:80px;border-radius:50%}
+.sky .time{position:absolute;left:14px;top:12px;font-weight:900;font-size:24px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.25)}
+.sky .lbl{position:absolute;left:14px;top:44px;font-size:13px;color:#fff;opacity:.95}
+.scene .bd{padding:14px;flex:1;display:flex;flex-direction:column}
+.scene .q{font-size:13px;color:var(--ink2);min-height:40px;margin-bottom:8px;display:flex;gap:6px;align-items:flex-start}
+.scene .q button{border:none;background:var(--soft);border-radius:8px;padding:2px 6px;font-size:14px;flex:0 0 auto}
+.scene textarea{flex:1;min-height:130px}
+
+/* STEP4 */
+.themes{display:flex;gap:8px;margin-top:6px}
+.sw{width:34px;height:34px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px var(--line);cursor:pointer}
+.sw.on{box-shadow:0 0 0 3px var(--ink)}
+.cardstage{perspective:1400px;display:flex;flex-direction:column;align-items:center;gap:10px;position:sticky;top:130px}
+.vcard{width:100%;max-width:470px;aspect-ratio:1.75;position:relative;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.4,1.4,.5,1);cursor:pointer}
+.vcard.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:18px;padding:22px 24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 22px 40px -18px rgba(29,35,64,.55);display:flex;flex-direction:column;overflow:hidden}
+.face.back{transform:rotateY(180deg)}
+.face .mk{font-size:11px;letter-spacing:3px;opacity:.75}
+.face .slog{font-family:'Gowun Batang',serif;font-size:22px;line-height:1.45;margin:auto 0;font-weight:700}
+.face .nm{font-size:22px;font-weight:900}
+.face .fd{font-size:13px;opacity:.85}
+.face .vals{display:flex;gap:6px;margin:6px 0 12px;flex-wrap:wrap}
+.face .vals span{border-radius:999px;padding:3px 12px;font-size:13px;font-weight:700}
+.face ul{margin:0;padding-left:18px;font-size:13.5px;line-height:1.7}
+.face .orb{position:absolute;right:-50px;bottom:-60px;width:190px;height:190px;border-radius:50%;opacity:.18}
+.ftip{font-size:12px;color:var(--ink2)}
+
+/* STEP5 */
+.prom{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:900px){.prom{grid-template-columns:1fr}}
+.pc{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;position:relative}
+.pc .ic{font-size:30px}
+.pc h4{margin:6px 0 2px;font-size:17px}
+.pc p{margin:0 0 10px;font-size:13px;color:var(--ink2)}
+.pc.ok{border-color:var(--teal);box-shadow:0 0 0 2px rgba(42,157,143,.2)}
+.pc.ok::after{content:'✓';position:absolute;top:12px;right:14px;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:900}
+.sealrow{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px;min-height:130px}
+.seal{width:118px;height:118px;border-radius:50%;border:4px double var(--red);color:var(--red);display:grid;place-items:center;text-align:center;font-family:'Gowun Batang',serif;font-weight:700;transform:rotate(-12deg) scale(0);opacity:0;transition:.5s cubic-bezier(.3,1.8,.5,1)}
+.seal.on{transform:rotate(-12deg) scale(1);opacity:.9}
+.seal small{display:block;font-size:12px}
+
+/* STEP6 */
+.poster{background:#fffdf8;border:1px solid var(--line);border-radius:22px;padding:28px;position:relative;overflow:hidden}
+.poster::before{content:'';position:absolute;right:-90px;top:-90px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,var(--gold2),transparent 70%)}
+.pz-head{font-size:13px;letter-spacing:2px;color:var(--ink2)}
+.pz-decl{font-family:'Gowun Batang',serif;font-size:25px;line-height:1.7;margin:12px 0 20px;position:relative}
+.pz-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media (max-width:900px){.pz-grid{grid-template-columns:1fr}}
+.pz{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px}
+.pz h5{margin:0 0 8px;font-size:13px;color:var(--gold);letter-spacing:1px}
+.pz p,.pz li{font-size:14px;line-height:1.65;margin:0}
+.pz ul{margin:0;padding-left:18px}
+.miniP{display:flex;flex-direction:column;align-items:center;gap:4px}
+.miniP span{background:var(--soft);border-radius:8px;padding:4px 10px;font-weight:700;font-size:14px}
+.miniP .r1{background:var(--gold);}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.empty-note{color:#b3aa95}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(30px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;opacity:0;transition:.3s;z-index:99;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+#printArea{display:none}
+
+/* ===== 인쇄 ===== */
+@page{size:A4;margin:0}
+@media print{
+  body{background:#fff}
+  body>*:not(#printArea){display:none!important}
+  #printArea{display:block}
+}
+.pg{width:210mm;height:297mm;padding:12mm 13mm 10mm;position:relative;overflow:hidden;page-break-after:always;break-after:page;font-family:'Noto Sans KR','Malgun Gothic',sans-serif;color:#111;font-size:10pt;-webkit-print-color-adjust:exact;print-color-adjust:exact;background:#fff}
+.pg:last-child{page-break-after:auto;break-after:auto}
+.pg .ph{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2.5px solid #111;padding-bottom:2mm}
+.pg .ph b{font-size:15pt;font-family:'Gowun Batang',serif}
+.pg .ph span{font-size:9pt;color:#444}
+.pg table.inf{width:100%;border-collapse:collapse;margin:2.5mm 0;font-size:9.5pt}
+.pg table.inf td{border:1px solid #888;padding:1.6mm 2.5mm}
+.pg .thm{background:#f2efe6;border-radius:2mm;padding:2mm 3mm;font-weight:700;font-size:10pt;margin-bottom:2mm}
+.pg h3{font-size:11pt;margin:3.2mm 0 1.2mm;padding-left:2mm;border-left:4px solid #e0a23a}
+.pg .qq{font-size:8.8pt;color:#444;margin:0 0 1.5mm}
+.pg table.vt{width:100%;border-collapse:collapse;font-size:9pt;table-layout:fixed}
+.pg table.vt th{background:#efeadd;border:1px solid #999;padding:1.2mm}
+.pg table.vt td{border:1px solid #999;padding:1.6mm;line-height:1.9;vertical-align:top}
+.pg .ci{display:inline-block;padding:0 1.2mm;margin:0 .3mm;border-radius:50%}
+.pg .ci.o{border:1.4px solid #c0392b;border-radius:3mm;font-weight:700}
+.pg .prow{display:flex;gap:4mm;margin-top:2mm;align-items:flex-start}
+.pg .ppy{flex:0 0 58mm;display:flex;flex-direction:column;align-items:center;gap:1.2mm}
+.pg .ppy div{border:1.2px solid #333;text-align:center;font-size:9.5pt;padding:1mm}
+.pg .ppy .a{width:40mm;min-height:13mm;border-radius:6mm 6mm 1mm 1mm;background:#f6e3b8;display:flex;flex-direction:column;justify-content:center}
+.pg .ppy .bb{display:flex;gap:1.2mm}
+.pg .ppy .bb div{width:28mm;min-height:11mm;display:flex;flex-direction:column;justify-content:center}
+.pg .ppy small{font-size:7.5pt;color:#666;display:block}
+.pg .lbl{font-size:9pt;font-weight:700;margin:1.5mm 0 .5mm}
+.pg .pl{position:relative;overflow:hidden}
+.pg .pl i{display:block;height:6.6mm;border-bottom:.25mm solid #9a9a9a}
+.pg .pl .tx{position:absolute;left:0;right:0;top:0;line-height:6.6mm;white-space:pre-wrap;font-size:9.6pt;padding:0 1mm;word-break:keep-all}
+.pg .want{border:1.5px solid #e0a23a;border-radius:2mm;padding:2mm 3mm;background:#fffaf0}
+.pg .want .lbl{margin-top:0}
+#printArea.render{display:block;position:fixed;left:-10000px;top:0}
+/* 100자 기술란 */
+.wantbox{position:relative}
+.wcount{position:absolute;right:12px;bottom:10px;font-size:12px;font-weight:700;color:var(--ink2);background:#fff;padding:1px 6px;border-radius:6px}
+.wcount.over{color:var(--red)}
+.exgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+@media (max-width:900px){.exgrid{grid-template-columns:1fr}}
+.ex{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fffdf8;cursor:pointer;transition:.15s;position:relative}
+.ex:hover{border-color:var(--gold);transform:translateY(-2px)}
+.ex .ft{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--soft);margin-bottom:6px}
+.ex p{margin:0;font-size:14px;line-height:1.65}
+.ex .n{position:absolute;right:12px;top:10px;font-size:11px;color:var(--ink2)}
+.pg .decl{border:1.2px solid #333;border-radius:2mm;padding:2.5mm 3mm;font-size:9.8pt;line-height:2}
+.pg .ul{border-bottom:1px solid #333;padding:0 1.5mm;display:inline-block;min-width:30mm;font-weight:700}
+.pg .card{border:1.5px solid #111;border-radius:3mm;padding:3mm 4mm;font-size:9.6pt;line-height:1.9}
+.pg table.pt{width:100%;border-collapse:collapse;font-size:9.5pt}
+.pg table.pt td{border:1px solid #888;padding:2mm;vertical-align:top}
+.pg table.pt td:first-child{width:38mm;white-space:nowrap;background:#efeadd;font-weight:700}
+.pg .pf{position:absolute;bottom:8mm;left:13mm;right:13mm;border-top:1px solid #999;padding-top:1.5mm;display:flex;justify-content:space-between;font-size:8.5pt;color:#555}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="logo">🧭 비전 공방 <small>나는 어떤 사람이 되고 싶은가</small></div>
+    <div class="info">
+      1학년 <input class="w1" data-k="cls" placeholder="반" inputmode="numeric">반
+      <input class="w1" data-k="num" placeholder="번호" inputmode="numeric">번
+      <input class="w2" data-k="name" placeholder="이름">
+      <input type="date" data-k="date">
+    </div>
+    <div class="tools">
+      <button class="tbtn" onclick="loadExample()">👀 예시 보기</button>
+      <button class="tbtn" onclick="savePDF()">📄 PDF 저장</button>
+      <button class="tbtn" onclick="printSheet(true)">🖨 빈 활동지</button>
+      <button class="tbtn" onclick="resetAll()">↺ 처음부터</button>
+    </div>
+  </div>
+  <nav id="nav"></nav>
+</header>
+
+<main>
+<!-- 0. 시작 -->
+<section class="step" id="s0">
+  <div class="hero">
+    <div>
+      <div style="font-size:13px;letter-spacing:3px;color:var(--ink2)">1학년 진로·창체 활동</div>
+      <h1>직업 이름 말고,<br><em>어떤 사람</em>이 될지<br>설계해 볼까요?</h1>
+      <p>“무엇이 될까”는 명사의 질문이에요. 오늘은 “어떻게 살며 세상에 무엇을 건넬까”라는 <b>동사의 질문</b>을 던집니다.
+      내 삶의 나침반이 될 가치를 고르고, 10년 뒤 어느 하루를 그려 보고, 미래의 나를 소개하는 명함까지 만들어요. 다 마치면 A4 2면 활동지로 그대로 인쇄됩니다.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+        <button class="btn gold" onclick="go(1)">여정 시작하기 →</button>
+        <button class="btn ghost" onclick="loadExample()">교사용 작성 예시 불러오기</button>
+      </div>
+    </div>
+    <svg class="bigcompass" viewBox="0 0 220 220" aria-hidden="true">
+      <circle cx="110" cy="110" r="104" fill="#1d2340"/>
+      <circle cx="110" cy="110" r="92" fill="#fffdf8"/>
+      <circle cx="110" cy="110" r="78" fill="none" stroke="#e8e0cd" stroke-width="10" stroke-dasharray="1.5 7"/>
+      <g font-family="Gowun Batang,serif" font-size="13" font-weight="700" fill="#1d2340" text-anchor="middle">
+        <text x="110" y="40">성장</text><text x="186" y="114">관계</text><text x="110" y="190">세상</text><text x="34" y="114">태도</text>
+      </g>
+      <g class="spin"><polygon points="110,36 119,110 110,117 101,110" fill="#e76f51"/><polygon points="110,184 119,110 110,103 101,110" fill="#1d2340"/></g>
+      <circle cx="110" cy="110" r="7" fill="#e0a23a" stroke="#fff" stroke-width="2"/>
+    </svg>
+  </div>
+  <div class="journey" id="journey"></div>
+</section>
+
+<!-- 1. 가치 나침반 -->
+<section class="step" id="s1">
+  <div class="shead"><div class="snum">01</div><div class="stitle"><h2>내 삶의 나침반 — 핵심 가치 고르기</h2><p>가장 포기할 수 없는 가치 <b>5개</b>를 고르고, 그중 <b>3개</b>를 피라미드에 올려 보세요.</p></div></div>
+  <div class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+      <b>가치 카드 31장</b><span class="counter" id="cnt">0 / 5</span>
+    </div>
+    <div class="vgrid" id="vgrid"></div>
+    <div class="vdesc" id="vdesc">카드에 마우스를 올리면 가치의 뜻이 보여요.</div>
+  </div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="panel">
+      <b>내가 고른 5개</b> <small style="color:var(--ink2)">— 눌러서 또는 끌어다 피라미드에 올리세요. 피라미드 칸을 누르면 비워집니다.</small>
+      <div class="tray" id="tray" style="margin-top:8px"></div>
+      <div class="pyr">
+        <div class="row"><div class="slot s1" data-i="0">1위 (최우선)</div></div>
+        <div class="row"><div class="slot" data-i="1">2위</div><div class="slot" data-i="2">3위</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <b>나의 나침반이 가리키는 곳</b>
+      <div class="compwrap">
+        <svg viewBox="0 0 220 220">
+          <circle cx="110" cy="110" r="104" fill="#1d2340"/><circle cx="110" cy="110" r="92" fill="#fffdf8"/>
+          <circle cx="110" cy="110" r="78" fill="none" stroke="#e8e0cd" stroke-width="10" stroke-dasharray="1.5 7"/>
+          <g font-family="Gowun Batang,serif" font-size="13" font-weight="700" text-anchor="middle">
+            <text x="110" y="40" fill="#7b61ff">성장</text><text x="186" y="114" fill="#e8618c">관계</text><text x="110" y="190" fill="#2a9d8f">세상</text><text x="34" y="114" fill="#d48a1c">태도</text>
+          </g>
+          <g id="needle"><polygon points="110,36 119,110 110,117 101,110" fill="#e76f51"/><polygon points="110,184 119,110 110,103 101,110" fill="#1d2340"/></g>
+          <circle cx="110" cy="110" r="7" fill="#e0a23a" stroke="#fff" stroke-width="2"/>
+        </svg>
+        <div class="compmsg" id="compmsg"><h4>아직 바늘이 흔들리는 중…</h4><p>피라미드에 가치를 올리면 나침반이 방향을 잡아요. 1위는 3배, 2위는 2배의 힘으로 바늘을 끌어당깁니다.</p></div>
+      </div>
+      <label class="lb" id="reasonLb">1위 가치를 가장 중요하게 생각하는 이유 <small>(내 삶의 경험과 연결하여)</small></label>
+      <textarea class="inp" data-k="reason" placeholder="그 가치가 중요하다고 느꼈던 실제 장면을 떠올려 써 보세요. 언제, 누구와, 무슨 일이 있었나요?"></textarea>
+    </div>
+  </div>
+  <div class="navrow"><button class="btn ghost" onclick="go(0)">← 처음으로</button><button class="btn" onclick="go(2)">다음: 동사형 비전 →</button></div>
+</section>
+
+<!-- 2. 동사형 비전 -->
+<section class="step" id="s2">
+  <div class="shead"><div class="snum">02</div><div class="stitle"><h2>명사형 꿈을 ‘동사형 비전’으로</h2><p>“어떤 직업을 가질까?” 대신 “그 일로 세상에 어떤 변화를 만들까?”를 고민해요.</p></div></div>
+  <div class="grid2">
+    <div class="panel">
+      <label class="lb">① 지금의 명사형 꿈 <small>“나는 ○○이(가) 되고 싶다”</small></label>
+      <input class="inp" data-k="noun" placeholder="예: 인공지능 소프트웨어 개발자 / 아직 모르겠음도 괜찮아요">
+      <label class="lb">② 해결하고 싶은 세상의 문제·필요</label>
+      <textarea class="inp" data-k="problem" style="min-height:64px" placeholder="누가, 어떤 불편이나 어려움을 겪고 있나요?"></textarea>
+      <div class="hint" data-target="problem" data-mode="set">
+        <button>기후 위기로 위협받는 일상</button><button>디지털 기기 사용이 어려운 사람들의 정보 소외</button><button>혼자 지내는 사람들의 고립과 외로움</button><button>지역에 따라 달라지는 교육 기회</button><button>안전사고로부터 보호받지 못하는 사람들</button><button>아파도 치료받기 어려운 사람들</button>
+      </div>
+      <label class="lb">③ 바탕이 될 나의 핵심 가치 <small>— STEP 1의 피라미드에서 골라 보세요</small></label>
+      <input class="inp" data-k="value" placeholder="예: 배려, 배움·탐구">
+      <div class="hint" id="valHint"></div>
+      <label class="lb">④ 구체적인 행동·기여 <small>“○○하는 사람”의 ○○</small></label>
+      <textarea class="inp" data-k="action" style="min-height:64px" placeholder="예: 누구나 쉽게 정보에 접근할 수 있는 AI 솔루션을 설계하고 보급"></textarea>
+      <div class="hint" data-target="action" data-mode="append">
+        <button>연구하고</button><button>설계하고</button><button>만들어 보급</button><button>가르치고</button><button>돌보고</button><button>알리고</button><button>연결하고</button><button>지켜 내고</button>
+      </div>
+      <label class="lb">관심을 두고 있는 사회적 문제나 타인의 어려움은?</label>
+      <textarea class="inp" data-k="concern" placeholder="뉴스, 주변 사람, 내 경험에서 마음이 쓰였던 일을 적어 보세요."></textarea>
+      <label class="lb">사람들에게 어떤 감정이나 도움을 주는 사람으로 기억되고 싶나요?</label>
+      <textarea class="inp" data-k="remember" placeholder="예: 기술 앞에서 주눅 들던 사람이 ‘나도 할 수 있다’고 느끼게 해 준 사람"></textarea>
+    </div>
+    <div>
+      <div class="morph">
+        <span class="tag">BEFORE · 명사형</span>
+        <div class="noun" id="nounBox"></div>
+        <div class="arrow">▼ 가치와 행동을 결합하면 ▼</div>
+        <span class="tag">AFTER · 동사형 선언</span>
+        <div class="verb" id="verbBox"></div>
+      </div>
+    </div>
+  </div>
+  <div class="navrow"><button class="btn ghost" onclick="go(1)">← 이전</button><button class="btn" onclick="go(3)">다음: 10년 후 하루 →</button></div>
+</section>
+
+<!-- 3. 10년 후 하루 -->
+<section class="step" id="s3">
+  <div class="shead"><div class="snum">03</div><div class="stitle"><h2>10년 후, 27세의 내가 맞이할 어느 하루</h2><p>평범하지만 보람찬 하루. 어떤 공간에서, 누구와, 무엇을 하며 가치를 실현하고 있나요?</p></div></div>
+  <p class="year" id="yearLine"></p>
+  <div class="scenes" id="scenes"></div>
+  <div class="navrow"><button class="btn ghost" onclick="go(2)">← 이전</button><button class="btn" onclick="go(4)">다음: 비전 명함 →</button></div>
+</section>
+
+<!-- 4. 비전 명함 -->
+<section class="step" id="s4">
+  <div class="shead"><div class="snum">04</div><div class="stitle"><h2>미래의 나를 대변하는 비전 명함</h2><p>명함을 누르면 뒷면이 보여요. 다 만들면 이미지로 저장할 수 있어요.</p></div></div>
+  <div class="grid2">
+    <div class="panel">
+      <label class="lb">나의 삶을 관통하는 한 줄 슬로건</label>
+      <input class="inp" data-k="slogan" placeholder="예: 장벽 없는 디지털 세상을 코딩하는 온기 있는 기술자">
+      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:10px">
+        <div><label class="lb">성명</label><input class="inp" data-k="cardName" placeholder="이름"></div>
+        <div><label class="lb">소속 / 활동 분야</label><input class="inp" data-k="field" placeholder="예: 포용적 AI 연구소 선임 연구원"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div><label class="lb">핵심 가치 1</label><input class="inp" data-k="cv1"></div>
+        <div><label class="lb">핵심 가치 2</label><input class="inp" data-k="cv2"></div>
+      </div>
+      <label class="lb">세상에 건네는 기여 (2가지)</label>
+      <input class="inp" data-k="give1" placeholder="기여 ①" style="margin-bottom:6px">
+      <input class="inp" data-k="give2" placeholder="기여 ②">
+      <label class="lb">명함 테마</label>
+      <div class="themes" id="themes"></div>
+    </div>
+    <div class="cardstage">
+      <div class="vcard" id="vcard" onclick="this.classList.toggle('flip')">
+        <div class="face front" id="cFront"></div>
+        <div class="face back" id="cBack"></div>
+      </div>
+      <div class="ftip">↻ 명함을 눌러 뒤집어 보세요</div>
+      <button class="btn gold" onclick="downloadCard()">명함 이미지(PNG) 저장</button>
+    </div>
+  </div>
+  <div class="navrow"><button class="btn ghost" onclick="go(3)">← 이전</button><button class="btn" onclick="go(5)">다음: 실천 약속 →</button></div>
+</section>
+
+<!-- 5. 실천 약속 -->
+<section class="step" id="s5">
+  <div class="shead"><div class="snum">05</div><div class="stitle"><h2>‘그런 사람’이 되기 위한 고1의 3대 실천 약속</h2><p>먼 미래는 오늘의 작은 행동에서 시작돼요. 세 가지를 모두 채우면 약속 도장이 찍힙니다.</p></div></div>
+  <div class="prom">
+    <div class="pc" id="pc1"><div class="ic">📚</div><h4>1. 학업 & 과목 선택</h4><p>2~3학년 때 깊이 있게 공부하고 싶은 과목/분야</p><textarea class="inp" data-k="p1" placeholder="예: 정보, 인공지능 기초, 수학과제 탐구"></textarea></div>
+    <div class="pc" id="pc2"><div class="ic">🔍</div><h4>2. 탐구 & 독서</h4><p>이번 학기에 읽을 책 1권 또는 탐구 주제</p><textarea class="inp" data-k="p2" placeholder="예: 접근성 관련 도서 읽고 학교 홈페이지 스크린리더 접근성 점검"></textarea></div>
+    <div class="pc" id="pc3"><div class="ic">🤝</div><h4>3. 학교생활 태도</h4><p>오늘부터 교실·친구 관계에서 실천할 작은 행동 1가지</p><textarea class="inp" data-k="p3" placeholder="예: 모둠 활동에서 소외되는 친구에게 먼저 다가가기"></textarea></div>
+  </div>
+  <div class="sealrow"><div class="seal" id="seal"><div>약속<br>완료<small id="sealName"></small></div></div></div>
+  <div class="navrow"><button class="btn ghost" onclick="go(4)">← 이전</button><button class="btn" onclick="go(6)">나의 비전 선언문 보기 →</button></div>
+</section>
+
+<!-- 6. 비전 선언문 -->
+<section class="step" id="s6">
+  <div class="shead"><div class="snum">✦</div><div class="stitle"><h2>나의 비전 선언문</h2><p>오늘 설계한 ‘되고 싶은 사람’을 한 장에 모았어요.</p></div></div>
+  <div class="poster" id="poster"></div>
+  <div class="acts">
+    <button class="btn teal" onclick="savePDF()">📄 활동지 전체 PDF 저장</button>
+    <button class="btn" onclick="printSheet(false)">🖨 작성한 활동지 인쇄 (A4 2면)</button>
+    <button class="btn gold" onclick="downloadCard()">🪪 명함 이미지 저장</button>
+    <button class="btn ghost" onclick="exportJSON()">💾 작성 내용 파일로 저장</button>
+    <button class="btn ghost" onclick="document.getElementById('jf').click()">📂 파일 불러오기</button>
+    <input type="file" id="jf" accept=".json" hidden onchange="importJSON(this)">
+  </div>
+  <div class="panel" style="margin-bottom:18px">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <b>🎯 내가 되고 싶은 사람 <small style="font-weight:400;color:var(--ink2)">— 생기부용, 100자 이내 · ‘~하는 사람이 되고자 함.’으로 끝맺기</small></b>
+      <div style="display:flex;gap:6px"><button class="tbtn" onclick="makeWant()">내 선언문으로 초안 만들기</button><button class="tbtn" onclick="copyWant()">복사</button></div>
+    </div>
+    <div class="wantbox" style="margin-top:10px">
+      <textarea class="inp" data-k="want" maxlength="100" style="min-height:80px;padding-bottom:28px" placeholder="누구를 위해, 어떤 가치를 바탕으로, 무엇을 하는 사람이 되고 싶은지 100자 안에 담아 보세요."></textarea>
+      <span class="wcount" id="wcount">0 / 100자</span>
+    </div>
+    <div style="margin-top:14px;font-weight:700;font-size:14px">💡 분야별 작성 예시 10 <small style="font-weight:400;color:var(--ink2)">— 누르면 위 칸에 옮겨집니다. 그대로 쓰지 말고 내 말로 바꿔 보세요.</small></div>
+    <div class="exgrid" id="exgrid"></div>
+  </div>
+  <div class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <b>📝 진로활동 기재 초안 <small style="font-weight:400;color:var(--ink2)">— 교사 관찰 내용을 더해 다듬어 사용하세요</small></b>
+      <div style="display:flex;gap:6px"><button class="tbtn" onclick="makeRecord()">초안 만들기</button><button class="tbtn" onclick="copyRecord()">복사</button></div>
+    </div>
+    <textarea class="inp" data-k="record" style="min-height:150px;margin-top:10px" placeholder="‘초안 만들기’를 누르면 작성 내용을 바탕으로 문장이 만들어져요."></textarea>
+    <div style="text-align:right;font-size:12px;color:var(--ink2);margin-top:4px" id="recLen"></div>
+  </div>
+  <div class="navrow"><button class="btn ghost" onclick="go(5)">← 이전</button><button class="btn ghost" onclick="go(0)">처음 화면</button></div>
+</section>
+</main>
+
+<div class="toast" id="toast"></div>
+<div id="printArea"></div>
+
+<script>
+/* ---------------- 데이터 ---------------- */
+const CATS=[
+ {id:'inner',name:'내면 & 성장',short:'성장',dir:0,hex:'#7b61ff',desc:'스스로 배우고 단단해지는 삶',
+  type:'탐구자형',msg:'스스로 배우고 깊어지며 자기만의 세계를 단단하게 쌓아 가는 사람이에요. 몰입할 수 있는 분야를 찾는 것이 진로의 열쇠가 됩니다.',
+  items:[['배움·탐구','모르는 것을 끝까지 파고드는 즐거움'],['성실','매일 해야 할 일을 묵묵히 해내는 힘'],['자유','내 방식대로 선택하고 움직일 수 있는 상태'],['창의성','없던 것을 새롭게 떠올리고 만드는 힘'],['자율성','누가 시키지 않아도 스스로 정하고 책임지기'],['도전','낯설고 어려운 일에 기꺼이 뛰어들기'],['끈기','실패해도 다시 붙잡고 이어 가는 힘'],['내적평화','흔들려도 나다운 중심을 지키는 마음']]},
+ {id:'rel',name:'관계 & 공존',short:'관계',dir:90,hex:'#e8618c',desc:'사람과 함께 따뜻하게 사는 삶',
+  type:'연결자형',msg:'사람 곁에서 힘을 얻고, 사람을 이어 주는 일에서 보람을 느끼는 사람이에요. 누구와 함께 일하는지가 행복을 크게 좌우합니다.',
+  items:[['공감','다른 사람의 마음을 내 일처럼 느끼기'],['친절','작은 도움을 아끼지 않는 태도'],['신뢰','믿을 수 있는 사람이 되고, 믿어 주기'],['협력','함께 힘을 모아 더 큰 일을 해내기'],['배려','상대의 입장에서 먼저 생각하기'],['존중','나와 다른 생각도 귀하게 여기기'],['유대감','서로 연결되어 있다는 든든함'],['소통','말하고 듣고, 마음이 오가게 하기']]},
+ {id:'soc',name:'사회 & 세상',short:'세상',dir:180,hex:'#2a9d8f',desc:'세상을 더 낫게 바꾸는 삶',
+  type:'변화가형',msg:'내 일이 세상의 어떤 문제를 풀고 있는지가 중요한 사람이에요. 사회 문제에 대한 관심을 탐구 주제로 연결해 보세요.',
+  items:[['정의','옳지 않은 일에 목소리 내기'],['공정','누구에게나 같은 기회와 기준'],['안전','모두가 다치지 않고 안심하는 세상'],['환경보호','지구와 다음 세대를 지키기'],['나눔','가진 것을 기꺼이 함께 쓰기'],['다양성','서로 다름이 어우러지는 세상'],['기여','내 능력으로 공동체에 보탬 되기'],['평등','차별 없이 누구나 동등하게']]},
+ {id:'att',name:'삶의 태도',short:'태도',dir:270,hex:'#d48a1c',desc:'어떤 상황에서도 지키는 나의 자세',
+  type:'중심형',msg:'어떤 직업을 갖든 ‘어떤 자세로 일하는가’를 지키는 사람이에요. 이 태도가 어느 분야에서나 나를 빛나게 할 무기입니다.',
+  items:[['정직','손해를 보더라도 거짓 없이'],['책임감','맡은 일은 끝까지 내 일로'],['유연함','상황에 맞게 부드럽게 바꾸는 힘'],['낙천성','내일은 나아질 거라 믿는 마음'],['긍정','어려움 속에서도 좋은 점 찾기'],['용기','두려워도 해야 할 일을 하는 힘'],['열정','좋아하는 일에 온 마음을 쏟기']]}
+];
+const VMAP={};CATS.forEach(c=>c.items.forEach(([v,d])=>VMAP[v]={cat:c,desc:d}));
+
+const SCENES=[
+ {k:'am',time:'08:30',lbl:'오전 · 출근하며 시작하는 순간',sky:'linear-gradient(180deg,#ffb88c 0%,#ffd89b 45%,#a1c4fd 100%)',sun:'#fff3b0',sx:'14%',sy:'62%',hill:'#7fb77e',
+  qs:['눈을 떠서 향하는 곳은 어디인가요? 그곳은 어떤 분위기인가요?','오늘 아침 가장 먼저 만나는 사람은 누구인가요?','출근길에 오늘 해야 할 일 중 가장 기대되는 일은?','책상(작업 공간) 위에는 무엇이 놓여 있나요?']},
+ {k:'pm',time:'14:00',lbl:'오후 · 몰입하여 가치를 실현하는 시간',sky:'linear-gradient(180deg,#4facfe 0%,#8fd3fe 60%,#e0f7ff 100%)',sun:'#fff8d6',sx:'72%',sy:'14%',hill:'#5fa36a',
+  qs:['시간 가는 줄 모르고 몰입하는 일은 무엇인가요?','오늘 해결하려는 문제는 무엇이고, 누구와 함께하나요?','내 핵심 가치가 드러나는 순간은 언제인가요?','어떤 도구·지식·기술을 쓰고 있나요?']},
+ {k:'eve',time:'19:30',lbl:'저녁 · 하루를 마감하며 느끼는 보람',sky:'linear-gradient(180deg,#232a5c 0%,#6a4c93 45%,#f0932b 100%)',sun:'#ffb36b',sx:'40%',sy:'72%',hill:'#2f3b5c',
+  qs:['오늘 하루 누군가에게 들은 가장 기쁜 말은?','퇴근길에 떠올리는 오늘의 보람은 무엇인가요?','저녁에는 누구와 어떤 시간을 보내나요?','10년 전 고1의 나에게 한마디 한다면?']}
+];
+const THEMES=[
+ {n:'밤하늘',stops:['#1d2340','#3b3f8f'],fg:'#ffffff',acc:'#f6d58e',chip:'rgba(255,255,255,.15)'},
+ {n:'한지',stops:['#fffdf6','#f1e3c2'],fg:'#1d2340',acc:'#b8730b',chip:'rgba(29,35,64,.08)'},
+ {n:'숲',stops:['#0f766e','#3cc59a'],fg:'#ffffff',acc:'#fef3c7',chip:'rgba(255,255,255,.18)'},
+ {n:'노을',stops:['#ff8a7a','#ff6a88'],fg:'#ffffff',acc:'#fff2c6',chip:'rgba(255,255,255,.2)'}
+];
+const STEPS=['시작','가치 나침반','동사형 비전','10년 후 하루','비전 명함','실천 약속','비전 선언문'];
+
+/* ---------------- 상태 ---------------- */
+const KEY='visionWorkshop_sungdo_v1';
+const BLANK={cls:'',num:'',name:'',date:'',picks:[],top:[null,null,null],reason:'',noun:'',problem:'',value:'',action:'',concern:'',remember:'',am:'',pm:'',eve:'',slogan:'',cardName:'',field:'',cv1:'',cv2:'',give1:'',give2:'',p1:'',p2:'',p3:'',theme:0,record:'',want:''};
+const WANT_EX=[
+ ['공학·소프트웨어','#7b61ff','디지털 기술에서 소외된 고령층과 장애인을 위해 배려와 탐구의 가치를 바탕으로 누구나 쉽게 쓰는 배리어프리 AI 서비스를 설계하는 기술자가 되고자 함.'],
+ ['의학·보건','#e8618c','아파도 치료받기 어려운 지역 주민을 위해 공감과 책임감을 바탕으로 의료 공백을 메우는 공공의료 현장의 의사가 되어 건강 격차를 줄이고자 함.'],
+ ['교육','#2a9d8f','배움에서 뒤처진 학생들이 포기하지 않도록 존중과 끈기를 바탕으로 한 사람 한 사람의 속도에 맞춰 배움의 즐거움을 되찾아 주는 교사가 되고자 함.'],
+ ['환경·에너지','#3c9d4e','기후 위기로부터 다음 세대의 일상을 지키기 위해 환경보호와 탐구의 가치를 바탕으로 탄소를 줄이는 친환경 에너지 기술을 연구하는 사람이 되고자 함.'],
+ ['법·인권','#1d2340','억울한 일을 당하고도 목소리를 내지 못하는 사람들을 위해 정의와 공정을 바탕으로 법의 문턱을 낮추어 권리를 지켜 주는 법조인이 되고자 함.'],
+ ['간호·돌봄','#ef7aa1','홀로 투병하는 환자와 가족이 외롭지 않도록 배려와 성실을 바탕으로 몸과 마음을 함께 돌보는 따뜻한 간호사가 되고자 함.'],
+ ['경영·사회적경제','#d48a1c','일자리에서 소외된 이웃이 자립할 수 있도록 나눔과 도전을 바탕으로 지속 가능한 사회적 기업을 세워 함께 성장하는 경영인이 되고자 함.'],
+ ['디자인·예술','#b0569e','다름이 차별이 되지 않는 세상을 위해 다양성과 창의성을 바탕으로 누구나 편하게 쓰는 유니버설 디자인을 만드는 디자이너가 되고자 함.'],
+ ['안전·도시공학','#e76f51','재난과 사고로부터 시민의 일상을 지키기 위해 안전과 책임감을 바탕으로 위험을 미리 예측하고 대비하는 도시 안전 시스템을 설계하는 사람이 되고자 함.'],
+ ['미디어·언론','#4a6fa5','가짜 뉴스로 혼란을 겪는 사람들을 위해 정직과 용기를 바탕으로 사실을 꼼꼼히 확인하고 쉽게 전달하여 신뢰받는 정보를 만드는 기자가 되고자 함.']
+];
+const clone=o=>JSON.parse(JSON.stringify(o));
+let S=load();let cur=0;let sceneQ=[0,0,0];
+function load(){try{const r=JSON.parse(localStorage.getItem(KEY));if(r)return Object.assign(clone(BLANK),r)}catch(e){}return clone(BLANK)}
+let st;function save(){clearTimeout(st);st=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},250)}
+if(!S.date){const d=new Date();S.date=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+
+/* ---------------- 유틸 ---------------- */
+const $=s=>document.querySelector(s);
+const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function hasB(w){const s=String(w||'').replace(/[\s'"”’)\]]+$/,'');const c=s.charCodeAt(s.length-1);if(c>=0xAC00&&c<=0xD7A3)return (c-0xAC00)%28!==0;return false}
+function rieul(w){const s=String(w||'').trim();const c=s.charCodeAt(s.length-1);return c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28===8}
+function j(w,a,b){return hasB(w)?a:b}
+function jro(w){return (hasB(w)&&!rieul(w))?'으로':'로'}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),1900)}
+function fmtDate(d){if(!d)return '';const p=d.split('-');return `${+p[1]}월 ${+p[2]}일`}
+
+/* ---------------- 입력 바인딩 ---------------- */
+function bindAll(){document.querySelectorAll('[data-k]').forEach(el=>{
+  const k=el.dataset.k;el.value=S[k]??'';
+  el.oninput=()=>{S[k]=el.value;document.querySelectorAll(`[data-k="${k}"]`).forEach(o=>{if(o!==el)o.value=el.value});save();refresh()};
+})}
+function setK(k,v){S[k]=v;document.querySelectorAll(`[data-k="${k}"]`).forEach(o=>o.value=v);save();refresh()}
+
+/* ---------------- 네비게이션 ---------------- */
+function done(i){
+  if(i===1)return S.top.every(Boolean)&&S.reason.trim();
+  if(i===2)return S.problem.trim()&&S.value.trim()&&S.action.trim();
+  if(i===3)return S.am.trim()&&S.pm.trim()&&S.eve.trim();
+  if(i===4)return S.slogan.trim()&&(S.cv1||'').trim();
+  if(i===5)return S.p1.trim()&&S.p2.trim()&&S.p3.trim();
+  return false}
+function renderNav(){$('#nav').innerHTML=STEPS.map((n,i)=>`<button class="nb ${i===cur?'on':''} ${done(i)?'done':''}" onclick="go(${i})"><span class="d">${done(i)?'✓':(i===0?'★':i===6?'✦':i)}</span>${n}</button>`).join('')}
+function go(i){
+  if(i===4){ if(!S.cardName&&S.name)setK('cardName',S.name); if(!S.cv1&&S.top[0])setK('cv1',S.top[0]); if(!S.cv2&&S.top[1])setK('cv2',S.top[1]); if(!S.value&&S.top[0]){} }
+  if(i===2&&!S.value&&S.top.filter(Boolean).length)setK('value',S.top.filter(Boolean).slice(0,2).join(', '));
+  cur=i;document.querySelectorAll('.step').forEach((s,k)=>s.classList.toggle('on',k===i));
+  renderNav();refresh();window.scrollTo({top:0,behavior:'smooth'});
+  if(i===2){const nb=$('#nounBox');nb.classList.remove('strike');if(S.noun){void nb.offsetWidth;setTimeout(()=>nb.classList.add('strike'),400)}}
+}
+
+/* ---------------- 인트로 ---------------- */
+$('#journey').innerHTML=[['🧭','가치 나침반','포기할 수 없는 가치 5개, 그리고 Top 3'],['✍️','동사형 비전','“○○가 될래” 대신 “○○하는 사람”'],['🌅','2036년의 하루','27세 나의 오전·오후·저녁'],['🪪','비전 명함','미래의 나를 소개하는 한 장'],['🤝','실천 약속','고1 지금 할 수 있는 3가지']].map((a,i)=>`<div class="jc" onclick="go(${i+1})"><b>${a[0]}</b><strong>STEP ${i+1}. ${a[1]}</strong><br><span>${a[2]}</span></div>`).join('');
+
+/* ---------------- STEP1 ---------------- */
+function renderGrid(){
+  $('#vgrid').innerHTML=CATS.map(c=>`<div class="vcol" style="--cc:${c.hex}"><h4><i style="background:${c.hex}"></i>${c.name}</h4><div class="cd">${c.desc}</div><div class="chips">${c.items.map(([v])=>{const r=S.top.indexOf(v);return `<button class="vchip ${S.picks.includes(v)?'on':''}" style="--cc:${c.hex}" data-v="${v}">${v}${r>=0?`<span class="rk">${r+1}위</span>`:''}</button>`}).join('')}</div></div>`).join('');
+  $('#cnt').textContent=`${S.picks.length} / 5`;
+  document.querySelectorAll('.vchip').forEach(b=>{
+    b.onmouseenter=()=>{const v=b.dataset.v;$('#vdesc').innerHTML=`<b>${v}</b> — ${VMAP[v].desc}`};
+    b.onclick=()=>togglePick(b.dataset.v,b);
+  });
+}
+function togglePick(v,el){
+  if(S.picks.includes(v)){S.picks=S.picks.filter(x=>x!==v);S.top=S.top.map(x=>x===v?null:x)}
+  else{if(S.picks.length>=5){el.classList.add('shake');setTimeout(()=>el.classList.remove('shake'),400);toast('5개까지만 고를 수 있어요. 하나를 빼고 다시 골라 보세요.');return}
+    S.picks.push(v)}
+  save();refresh();
+}
+function renderTray(){
+  const t=$('#tray');
+  t.innerHTML=S.picks.length?S.picks.map(v=>`<button class="tchip ${S.top.includes(v)?'used':''}" draggable="true" data-v="${v}" style="background:${VMAP[v].cat.hex}">${v}</button>`).join(''):'<span class="empty">위에서 가치 카드를 골라 주세요.</span>';
+  t.querySelectorAll('.tchip').forEach(b=>{
+    b.ondragstart=e=>e.dataTransfer.setData('text/plain',b.dataset.v);
+    b.onclick=()=>{const v=b.dataset.v;if(S.top.includes(v)){toast('이미 피라미드에 있어요. 칸을 누르면 빠집니다.');return}const i=S.top.indexOf(null);if(i<0){toast('피라미드가 가득 찼어요. 칸을 눌러 비운 뒤 올려 보세요.');return}place(v,i)};
+  });
+  document.querySelectorAll('.slot').forEach(s=>{
+    const i=+s.dataset.i,v=S.top[i];
+    s.classList.toggle('f',!!v);
+    s.style.background=v&&i>0?VMAP[v].cat.hex:'';
+    s.innerHTML=v?`<small>${i+1}위</small><b>${v}</b>`:(i===0?'1위 (최우선)':`${i+1}위`);
+    s.onclick=()=>{if(S.top[i]){S.top[i]=null;save();refresh()}};
+    s.ondragover=e=>{e.preventDefault();s.classList.add('over')};
+    s.ondragleave=()=>s.classList.remove('over');
+    s.ondrop=e=>{e.preventDefault();s.classList.remove('over');const v=e.dataTransfer.getData('text/plain');if(v)place(v,i)};
+  });
+  $('#reasonLb').innerHTML=S.top[0]?`1위 가치 ‘${S.top[0]}’${j(S.top[0],'을','를')} 가장 중요하게 생각하는 이유 <small>(내 삶의 경험과 연결하여)</small>`:'1위 가치를 가장 중요하게 생각하는 이유 <small>(내 삶의 경험과 연결하여)</small>';
+}
+function place(v,i){const o=S.top.indexOf(v);if(o>=0)S.top[o]=null;S.top[i]=v;save();refresh();if(S.top.every(Boolean))toast('🧭 나침반이 방향을 찾았어요!')}
+function compass(){
+  const w=[3,2,1];let x=0,y=0,n=0;
+  S.top.forEach((v,i)=>{if(!v)return;const a=VMAP[v].cat.dir*Math.PI/180;x+=w[i]*Math.sin(a);y+=w[i]*Math.cos(a);n++});
+  const nd=$('#needle');
+  if(!n){nd.style.transform='rotate(-25deg)';$('#compmsg').innerHTML='<h4>아직 바늘이 흔들리는 중…</h4><p>피라미드에 가치를 올리면 나침반이 방향을 잡아요. 1위는 3배, 2위는 2배의 힘으로 바늘을 끌어당깁니다.</p>';return null}
+  let ang=Math.hypot(x,y)<.01?VMAP[S.top.find(Boolean)].cat.dir:(Math.atan2(x,y)*180/Math.PI+360)%360;
+  nd.style.transform=`rotate(${ang}deg)`;
+  const near=CATS.slice().sort((a,b)=>angD(a.dir,ang)-angD(b.dir,ang));
+  const main=near[0],sub=angD(main.dir,ang)>22?near[1]:null;
+  const title=sub?`${main.short}와 ${sub.short} 사이를 가리키는 나침반`:`‘${main.short}’ 쪽을 가리키는 ${main.type} 나침반`;
+  $('#compmsg').innerHTML=`<h4>${title}</h4><p>${main.msg}${sub?`<br><br>여기에 <b>${sub.name}</b>의 힘도 함께 당기고 있어요 — ${sub.desc}.`:''}</p>`;
+  return {main,sub,title};
+}
+function angD(a,b){const d=Math.abs(a-b)%360;return d>180?360-d:d}
+
+/* ---------------- STEP2 ---------------- */
+document.querySelectorAll('.hint[data-target]').forEach(h=>h.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+  const k=h.dataset.target;if(h.dataset.mode==='set')setK(k,b.textContent);else setK(k,(S[k]?S[k].trim()+' ':'')+b.textContent);
+}));
+function fl(t,c,ph){return t&&t.trim()?`<span class="fl ${c}">${esc(t.trim())}</span>`:`<span class="fl e">${ph}</span>`}
+function renderVerb(){
+  const top=S.top.filter(Boolean);
+  $('#valHint').innerHTML=top.length?top.map(v=>`<button data-v="${v}">${v}</button>`).join(''):'<span style="font-size:12px;color:var(--ink2)">STEP 1에서 피라미드를 채우면 여기 나타나요.</span>';
+  $('#valHint').querySelectorAll('button').forEach(b=>b.onclick=()=>{const cur=S.value.split(',').map(s=>s.trim()).filter(Boolean);const v=b.dataset.v;setK('value',(cur.includes(v)?cur.filter(x=>x!==v):[...cur,v]).join(', '))});
+  const n=S.noun.trim();
+  $('#nounBox').innerHTML=`“나는 ${n?`<b>${esc(n)}</b>${j(n,'이','가')}`:'<span style="opacity:.5">________ (이)가</span>'} 되고 싶다.”`;
+  $('#verbBox').innerHTML=`“나는 ${fl(S.problem,'p','세상의 문제·필요')}${S.problem.trim()?j(S.problem,'을','를'):'를'} 해결하기 위해,<br>${fl(S.value,'v','나의 핵심 가치')}${S.value.trim()?j(S.value,'을','를'):'를'} 바탕으로,<br>${fl(S.action,'a','구체적 행동·기여')}하는<br>사람이 되고 싶다.”`;
+}
+function declText(d){
+  if(!(d.problem.trim()||d.action.trim()))return '';
+  return `나는 ${d.problem.trim()}${j(d.problem,'을','를')} 해결하기 위해, ${d.value.trim()}${j(d.value,'을','를')} 바탕으로, ${d.action.trim()}하는 사람이 되고 싶다.`;
+}
+
+/* ---------------- STEP3 ---------------- */
+function buildScenes(){
+  $('#scenes').innerHTML=SCENES.map((s,i)=>`<div class="scene"><div class="sky" style="background:${s.sky}"><div class="sun" style="left:${s.sx};top:${s.sy};background:${s.sun}"></div><div class="hill" style="background:${s.hill}"></div><div class="time">${s.time}</div><div class="lbl">${s.lbl}</div></div>
+  <div class="bd"><div class="q"><button title="다른 상상 질문" onclick="nextQ(${i})">🎲</button><span id="q${i}">${s.qs[0]}</span></div><textarea class="inp" data-k="${s.k}" placeholder="장소, 함께하는 사람, 하는 일, 느끼는 감정을 구체적으로…"></textarea></div></div>`).join('');
+}
+function nextQ(i){sceneQ[i]=(sceneQ[i]+1)%SCENES[i].qs.length;const el=$('#q'+i);el.style.opacity=0;setTimeout(()=>{el.textContent=SCENES[i].qs[sceneQ[i]];el.style.opacity=1},150)}
+function yearLine(){const nm=S.name||'나';$('#yearLine').innerHTML=`<b>2036년 ${fmtDate(S.date)||'어느 날'}</b> · 스물일곱 살 ${esc(nm)}의 하루${S.slogan?` — “${esc(S.slogan)}”`:''}`}
+
+/* ---------------- STEP4 ---------------- */
+function renderThemes(){$('#themes').innerHTML=THEMES.map((t,i)=>`<div class="sw ${S.theme===i?'on':''}" title="${t.n}" style="background:linear-gradient(135deg,${t.stops[0]},${t.stops[1]})" onclick="S.theme=${i};save();refresh()"></div>`).join('')}
+function renderCard(){
+  const t=THEMES[S.theme]||THEMES[0];const bg=`linear-gradient(135deg,${t.stops[0]},${t.stops[1]})`;
+  const nm=S.cardName||S.name||'이름';
+  ['#cFront','#cBack'].forEach(s=>{const e=$(s);e.style.background=bg;e.style.color=t.fg});
+  $('#cFront').innerHTML=`<div class="orb" style="background:${t.acc}"></div><div class="mk">VISION CARD · 2036</div><div class="slog">“${esc(S.slogan||'나의 삶을 관통하는 한 줄 슬로건')}”</div><div class="nm">${esc(nm)}</div><div class="fd">${esc(S.field||'소속 / 활동 분야')}</div>`;
+  const vals=[S.cv1,S.cv2].filter(x=>x&&x.trim());
+  $('#cBack').innerHTML=`<div class="mk">CORE VALUES</div><div class="vals">${(vals.length?vals:['핵심 가치']).map(v=>`<span style="background:${t.chip};color:${t.acc}">${esc(v)}</span>`).join('')}</div><div class="mk">MY CONTRIBUTION TO THE WORLD</div><ul style="margin-top:6px">${[S.give1,S.give2].map((g,i)=>`<li>${esc(g||'세상에 건네는 기여 '+(i+1))}</li>`).join('')}</ul><div style="margin-top:auto;font-size:12px;opacity:.75">${esc(nm)} · ${esc(S.field||'')}</div>`;
+}
+function wrap(ctx,text,x,y,maxW,lh,maxL){
+  const chars=[...String(text)];let line='',lines=[];
+  for(const ch of chars){const test=line+ch;if(ctx.measureText(test).width>maxW&&line){lines.push(line);line=ch}else line=test}
+  if(line)lines.push(line);
+  if(lines.length>maxL){lines=lines.slice(0,maxL);lines[maxL-1]=lines[maxL-1].slice(0,-1)+'…'}
+  lines.forEach((l,i)=>ctx.fillText(l,x,y+i*lh));return lines.length;
+}
+function rr(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+async function downloadCard(){
+  try{await document.fonts.ready}catch(e){}
+  const t=THEMES[S.theme]||THEMES[0];const W=1050,H=600,G=40;
+  const cv=document.createElement('canvas');cv.width=W+G*2;cv.height=H*2+G*3;const c=cv.getContext('2d');
+  c.fillStyle='#f4efe3';c.fillRect(0,0,cv.width,cv.height);
+  const F='"Noto Sans KR","Malgun Gothic",sans-serif',SF='"Gowun Batang","Noto Serif KR",serif';
+  const nm=S.cardName||S.name||'이름';
+  for(let k=0;k<2;k++){
+    const ox=G,oy=G+k*(H+G);c.save();rr(c,ox,oy,W,H,36);c.clip();
+    const g=c.createLinearGradient(ox,oy,ox+W,oy+H);g.addColorStop(0,t.stops[0]);g.addColorStop(1,t.stops[1]);c.fillStyle=g;c.fillRect(ox,oy,W,H);
+    c.globalAlpha=.18;c.fillStyle=t.acc;c.beginPath();c.arc(ox+W-60,oy+H-40,210,0,Math.PI*2);c.fill();c.globalAlpha=1;
+    c.fillStyle=t.fg;c.textBaseline='top';
+    if(k===0){
+      c.globalAlpha=.7;c.font=`500 22px ${F}`;c.fillText('VISION CARD · 2036',ox+56,oy+50);c.globalAlpha=1;
+      c.font=`700 46px ${SF}`;wrap(c,`“${S.slogan||'나의 삶을 관통하는 한 줄 슬로건'}”`,ox+56,oy+160,W-112,66,3);
+      c.font=`900 46px ${F}`;c.fillText(nm,ox+56,oy+H-150);
+      c.globalAlpha=.85;c.font=`400 26px ${F}`;c.fillText(S.field||'',ox+56,oy+H-90);c.globalAlpha=1;
+    }else{
+      c.globalAlpha=.7;c.font=`500 20px ${F}`;c.fillText('CORE VALUES',ox+56,oy+50);c.globalAlpha=1;
+      let px=ox+56;c.font=`700 28px ${F}`;
+      [S.cv1,S.cv2].filter(v=>v&&v.trim()).forEach(v=>{const w=c.measureText(v).width+44;c.fillStyle=t.chip;rr(c,px,oy+88,w,52,26);c.fill();c.fillStyle=t.acc;c.fillText(v,px+22,oy+99);px+=w+14});
+      c.fillStyle=t.fg;c.globalAlpha=.7;c.font=`500 20px ${F}`;c.fillText('MY CONTRIBUTION TO THE WORLD',ox+56,oy+180);c.globalAlpha=1;
+      c.font=`400 28px ${F}`;let yy=oy+222;
+      [S.give1,S.give2].filter(Boolean).forEach(gv=>{c.fillText('•',ox+56,yy);const n=wrap(c,gv,ox+86,yy,W-150,42,2);yy+=n*42+18});
+      c.globalAlpha=.75;c.font=`400 22px ${F}`;c.fillText(`${nm}${S.field?' · '+S.field:''}`,ox+56,oy+H-70);c.globalAlpha=1;
+    }
+    c.restore();
+  }
+  const a=document.createElement('a');a.download=`비전명함_${S.cls||''}반_${S.num||''}번_${S.name||'학생'}.png`;a.href=cv.toDataURL('image/png');a.click();toast('명함 이미지를 저장했어요.');
+}
+
+/* ---------------- STEP5 ---------------- */
+function renderPromise(){
+  ['p1','p2','p3'].forEach((k,i)=>$('#pc'+(i+1)).classList.toggle('ok',!!S[k].trim()));
+  const ok=done(5);const s=$('#seal');if(ok&&!s.classList.contains('on'))setTimeout(()=>s.classList.add('on'),100);if(!ok)s.classList.remove('on');
+  $('#sealName').textContent=S.name||'';
+}
+
+/* ---------------- STEP6 ---------------- */
+function renderPoster(){
+  const t=S.top;const cp=compassInfo();
+  const decl=declText(S);
+  const L=x=>x&&x.trim()?esc(x):'<span class="empty-note">아직 작성하지 않았어요</span>';
+  $('#poster').innerHTML=`<div class="pz-head">2026 · 1학년 ${esc(S.cls||'○')}반 ${esc(S.num||'○')}번 ${esc(S.name||'')}의 비전 선언</div>
+  <div class="pz-decl">${decl?`“${esc(decl)}”`:'<span class="empty-note">STEP 2에서 동사형 선언을 완성해 보세요.</span>'}</div>
+  ${S.want.trim()?`<div class="pz" style="margin-bottom:14px;border-color:var(--gold);background:#fffaf0"><h5>🎯 내가 되고 싶은 사람 (${[...S.want].length}자)</h5><p class="serif" style="font-size:17px">${esc(S.want)}</p></div>`:''}
+  <div class="pz-grid">
+    <div class="pz"><h5>나의 가치 피라미드</h5><div class="miniP"><span class="r1">${esc(t[0]||'1위')}</span><div style="display:flex;gap:4px"><span>${esc(t[1]||'2위')}</span><span>${esc(t[2]||'3위')}</span></div></div><p style="margin-top:10px;font-size:13px;color:var(--ink2)">${cp?esc(cp.title):''}</p></div>
+    <div class="pz"><h5>명함 슬로건</h5><p class="serif" style="font-size:18px">${S.slogan?`“${esc(S.slogan)}”`:L('')}</p><p style="margin-top:6px;font-size:13px;color:var(--ink2)">${esc(S.cardName||S.name||'')} ${S.field?'· '+esc(S.field):''}</p></div>
+    <div class="pz"><h5>2036년 어느 하루</h5><ul><li><b>오전</b> ${L(S.am)}</li><li><b>오후</b> ${L(S.pm)}</li><li><b>저녁</b> ${L(S.eve)}</li></ul></div>
+    <div class="pz"><h5>고1, 지금의 약속</h5><ul><li><b>학업</b> ${L(S.p1)}</li><li><b>탐구</b> ${L(S.p2)}</li><li><b>태도</b> ${L(S.p3)}</li></ul></div>
+  </div>`;
+}
+function compassInfo(){const w=[3,2,1];let x=0,y=0,n=0;S.top.forEach((v,i)=>{if(!v)return;const a=VMAP[v].cat.dir*Math.PI/180;x+=w[i]*Math.sin(a);y+=w[i]*Math.cos(a);n++});if(!n)return null;const ang=Math.hypot(x,y)<.01?VMAP[S.top.find(Boolean)].cat.dir:(Math.atan2(x,y)*180/Math.PI+360)%360;const near=CATS.slice().sort((a,b)=>angD(a.dir,ang)-angD(b.dir,ang));const m=near[0],s=angD(m.dir,ang)>22?near[1]:null;return {title:s?`${m.short}와 ${s.short} 사이를 가리키는 나침반`:`‘${m.short}’ 쪽을 가리키는 ${m.type} 나침반`}}
+function makeRecord(){
+  const t=S.top.filter(Boolean);const out=[];
+  out.push(`‘나는 어떤 사람이 되고 싶은가’ 가치관 탐색 활동에서 핵심 가치 목록을 살펴보고${t.length?` ‘${t.join('’, ‘')}’${j(t[t.length-1],'을','를')} 삶의 우선 가치로 선정함`:' 자신의 삶에서 포기할 수 없는 가치를 선정함'}.`);
+  if(S.reason.trim()&&t[0])out.push(`특히 ‘${t[0]}’${j(t[0],'을','를')} 최우선 가치로 꼽은 이유를 자신의 경험과 연결하여 진솔하게 설명함.`);
+  if(S.problem.trim()&&S.action.trim())out.push(`${S.noun.trim()?`‘${S.noun.trim()}’${j(S.noun,'이','가')} 되겠다는 명사형 꿈을 `:''}‘${S.problem.trim()}’${j(S.problem,'을','를')} 해결하기 위해 ${S.value.trim()?S.value.trim()+j(S.value,'을','를')+' 바탕으로 ':''}${S.action.trim()}하는 사람이라는 동사형 비전으로 재구성하여 직업 너머 삶의 방향을 구체화함.`);
+  if(S.am.trim()||S.pm.trim()||S.eve.trim())out.push('10년 후 27세의 하루를 오전·오후·저녁으로 나누어 상상하며 자신의 가치가 실현되는 장면을 구체적으로 그려 냄.');
+  if(S.slogan.trim())out.push(`‘${S.slogan.trim()}’${jro(S.slogan)} 자신을 소개하는 비전 명함을 제작하며 미래의 자아상을 명료하게 표현함.`);
+  const p=[];if(S.p1.trim())p.push('희망 분야와 연계한 과목 선택');if(S.p2.trim())p.push('관련 도서 탐독 및 탐구 계획');if(S.p3.trim())p.push('공동체 속 실천 행동');
+  if(p.length)out.push(`이를 실현하기 위한 ${p.join(', ')} 등 고1 단계의 실천 약속을 세움.`);
+  setK('record',out.join(' '));toast('초안을 만들었어요. 학생 특성에 맞게 다듬어 주세요.');
+}
+/* ---------------- 100자 기술란 ---------------- */
+function renderExamples(){
+  $('#exgrid').innerHTML=WANT_EX.map((e,i)=>`<div class="ex" data-i="${i}"><span class="ft" style="background:${e[1]}22;color:${e[1]}">${i+1}. ${e[0]}</span><span class="n">${e[2].length}자</span><p>${esc(e[2])}</p></div>`).join('');
+  document.querySelectorAll('.ex').forEach(el=>el.onclick=()=>{
+    const t=WANT_EX[+el.dataset.i][2];
+    if(S.want.trim()&&S.want.trim()!==t&&!confirm('지금 쓴 문장 대신 이 예시를 옮겨 올까요?'))return;
+    setK('want',t);toast('예시를 옮겼어요. 내 경험과 말로 바꿔 보세요.');
+  });
+}
+function wantCount(){const n=[...(S.want||'')].length;const el=$('#wcount');el.textContent=`${n} / 100자`;el.classList.toggle('over',n>100)}
+function joinVals(v){const a=v.split(/[,/]|\s와\s|\s과\s/).map(s=>s.trim()).filter(Boolean);
+  if(a.length<2)return a[0]||'';return a.slice(0,-1).map(x=>x+j(x,'과','와')).join(' ')+' '+a[a.length-1]}
+function makeWant(){
+  const val=S.value.trim()?joinVals(S.value):joinVals(S.top.filter(Boolean).slice(0,2).join(','));
+  const act=S.action.trim(),pr=S.problem.trim();
+  if(!act||!val){toast('STEP 2의 핵심 가치와 행동·기여를 먼저 채워 주세요.');return}
+  const tail=`${val}${j(val,'을','를')} 바탕으로 ${act}하는 사람이 되고자 함.`;
+  let s=pr?`${pr}${j(pr,'을','를')} 해결하기 위해 ${tail}`:tail;
+  if([...s].length>100)s=tail;
+  if([...s].length>100){setK('want',s.slice(0,100));toast('100자를 넘어 잘렸어요. 문장을 줄여 다듬어 주세요.');return}
+  setK('want',s);toast(`${[...s].length}자 초안을 만들었어요.`);
+}
+function copyWant(){const v=S.want||'';if(!v.trim()){toast('먼저 문장을 써 주세요.');return}
+  (navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast('복사했어요.')).catch(()=>{const ta=document.querySelector('[data-k="want"]');ta.select();document.execCommand('copy');toast('복사했어요.')})}
+
+/* ---------------- PDF 저장 ---------------- */
+function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s)})}
+let pdfBusy=false;
+async function savePDF(){
+  if(pdfBusy)return;pdfBusy=true;
+  const name=`비전공방_활동지_${S.cls||''}반_${S.num||''}번_${S.name||'학생'}`;
+  const pa=$('#printArea');pa.innerHTML=sheetHTML(S,false);
+  toast('PDF를 만드는 중이에요… 잠시만 기다려 주세요.');
+  try{
+    if(!window.html2canvas)await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+    if(!(window.jspdf&&window.jspdf.jsPDF))await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+    try{await document.fonts.ready}catch(e){}
+    pa.classList.add('render');
+    const pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
+    const pages=pa.querySelectorAll('.pg');
+    for(let i=0;i<pages.length;i++){
+      const c=await html2canvas(pages[i],{scale:2,backgroundColor:'#ffffff',useCORS:true,logging:false});
+      if(i)pdf.addPage();
+      pdf.addImage(c.toDataURL('image/jpeg',0.93),'JPEG',0,0,210,297);
+    }
+    pdf.save(name+'.pdf');toast('📄 활동지 PDF(2쪽)를 저장했어요.');
+  }catch(e){
+    // 인터넷이 안 되면 인쇄 창의 ‘PDF로 저장’으로 대신합니다
+    const t=document.title;document.title=name;
+    toast('인쇄 창에서 대상을 ‘PDF로 저장’으로 선택해 주세요.');
+    setTimeout(()=>{window.print();document.title=t},500);
+  }finally{pa.classList.remove('render');pdfBusy=false}
+}
+function copyRecord(){const v=S.record||'';if(!v.trim()){toast('먼저 초안을 만들어 주세요.');return}
+  (navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast('복사했어요.')).catch(()=>{const ta=document.querySelector('[data-k="record"]');ta.select();document.execCommand('copy');toast('복사했어요.')})}
+function recLen(){const v=S.record||'';const b=[...v].reduce((a,ch)=>a+(ch.charCodeAt(0)>127?3:(ch==='\n'?2:1)),0);$('#recLen').textContent=v?`${[...v].length}자 · ${b}바이트(NEIS 기준)`:''}
+
+/* ---------------- 저장/불러오기 ---------------- */
+function exportJSON(){const b=new Blob([JSON.stringify(S,null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`비전공방_${S.cls||''}반_${S.num||''}번_${S.name||'학생'}.json`;a.click();toast('작성 내용을 파일로 저장했어요.')}
+function importJSON(inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{S=Object.assign(clone(BLANK),JSON.parse(r.result));save();bindAll();refresh();toast('불러왔어요.')}catch(e){toast('파일을 읽을 수 없어요.')}};r.readAsText(f);inp.value=''}
+function resetAll(){if(!confirm('작성한 내용을 모두 지우고 처음부터 시작할까요?'))return;const d=S.date;S=clone(BLANK);S.date=d;save();bindAll();go(0);toast('새로 시작합니다.')}
+function loadExample(){
+  if(Object.keys(BLANK).some(k=>k!=='date'&&k!=='theme'&&String(S[k]??'')!==String(BLANK[k]??''))&&!confirm('지금 작성한 내용 대신 교사용 작성 예시를 불러올까요?'))return;
+  S=Object.assign(clone(BLANK),{cls:'3',num:'7',name:'김성도',date:S.date,
+   picks:['배려','공감','배움·탐구','창의성','책임감'],top:['배려','배움·탐구','창의성'],
+   reason:"중학교 시절 시각장애를 가진 친구와 컴퓨터 실습을 함께했을 때, 키보드와 화면 낭독 프로그램 설정 하나만 바꿔 주어도 친구가 혼자 힘으로 코딩을 완수하는 모습을 보며 '기술은 사람에 대한 따뜻한 관심에서 출발해야 가치가 있다'는 것을 깊이 느꼈기 때문입니다.",
+   noun:'인공지능 소프트웨어 개발자',problem:'기술 발전의 혜택에서 소외되기 쉬운 디지털 약자(고령층, 장애인 등)의 불편함',value:'배려, 배움·탐구',action:'누구나 손쉽게 정보에 접근할 수 있는 배리어프리(Barrier-Free) 인공지능 솔루션을 설계하고 보급',
+   concern:'키오스크와 앱 예약이 늘어나면서 디지털 기기 사용이 어려운 어르신과 장애인이 일상에서 겪는 정보 소외 문제',
+   remember:'기술 앞에서 주눅 들던 사람이 "나도 혼자 할 수 있다"는 자신감을 느끼도록 도와준 따뜻한 사람',
+   am:'복지관 어르신들과 시각장애인 분들이 테스트 중인 음성 기반 생활 지원 앱의 사용자 피드백 로그를 확인하며, 인식 오류가 발생한 문맥 패턴을 팀원들과 화이트보드에 정리한다.',
+   pm:'복잡한 인터페이스를 걷어 내고 음성과 제스처만으로 병원 예약과 행정 민원을 처리할 수 있도록 딥러닝 기반 경량화 모델 코드를 수정하고 최적화 테스트를 수행한다.',
+   eve:'"이 앱 덕분에 손주 도움 없이 처음으로 혼자 약 처방을 받았다"는 사용자 리뷰 메일을 확인하며, 내 기술이 누군가의 자립을 돕고 있음을 실감하고 가벼운 마음으로 퇴근길에 오른다.',
+   slogan:'장벽 없는 디지털 세상을 코딩하는 온기 있는 기술자',cardName:'김성도',field:'포용적 AI 소프트웨어 연구소 선임 연구원',cv1:'배려(공감)',cv2:'배움·탐구',
+   give1:'고령층·장애인을 위한 접근성 중심 인터페이스 개발',give2:'오픈소스 배리어프리 라이브러리 배포',
+   p1:"2학년 때 '정보', '인공지능 기초', '수학과제 탐구'를 선택하여 알고리즘의 기초 논리와 인간공학적 데이터 처리 역량을 기른다.",
+   p2:'배리어프리 인터페이스 디자인 관련 도서를 읽고, 학교 홈페이지의 시각장애인 스크린리더 접근성을 점검하는 동아리 소논문 프로젝트를 진행한다.',
+   p3:'모둠 활동 시 발표나 전자기기 활용에 익숙지 않아 소외되는 조원이 없도록 먼저 다가가 사용법을 차근차근 알려 준다.',theme:0,record:'',want:WANT_EX[0][2]});
+  save();bindAll();go(6);toast('공학·소프트웨어 분야 작성 예시를 불러왔어요.');
+}
+
+/* ---------------- 인쇄 ---------------- */
+function pl(t,n){return `<div class="pl" style="height:${(n*6.6).toFixed(1)}mm">${'<i></i>'.repeat(n)}<div class="tx">${esc(t||'')}</div></div>`}
+function ul(t,w){return `<span class="ul" style="min-width:${w}mm">${esc(t||'')}</span>`}
+function sheetHTML(d,blank){
+  const dt=d.date&&!blank?d.date.split('-'):null;
+  const vt=CATS.map(c=>`<td>${c.items.map(([v])=>`<span class="ci ${!blank&&d.picks.includes(v)?'o':''}">${v}</span>`).join(', ')}</td>`).join('');
+  const T=i=>blank?'':esc(d.top[i]||'');
+  const p1=`<div class="pg">
+   <div class="ph"><b>나는 어떤 사람이 되고 싶은가?</b><span>[ 1학년 진로·창체 활동지 ]</span></div>
+   <table class="inf"><tr><td>학년: 1 학년</td><td>반: ${ul(blank?'':d.cls,10)} 반</td><td>번호: ${ul(blank?'':d.num,10)} 번</td><td>이름: ${ul(blank?'':d.name,32)}</td></tr>
+   <tr><td colspan="3">일시: 2026년 ${dt?`${+dt[1]}월 ${+dt[2]}일`:'____월 ____일'}</td><td>확인: (인/서명)</td></tr></table>
+   <div class="thm">주제: 직업 너머의 삶을 그리는 가치관 탐색 “나는 어떤 사람이 되고 싶은가”</div>
+   <h3>[STEP 1] 내 삶의 나침반: 핵심 가치관 30선 둘러보기</h3>
+   <p class="qq">다음 가치 목록 중에서 내가 삶에서 <b>가장 포기할 수 없는 단어 5개</b>에 동그라미 치고, 그중 <b>가장 중요한 3가지</b>를 피라미드에 적어 보세요.</p>
+   <table class="vt"><tr>${CATS.map(c=>`<th>${c.name}</th>`).join('')}</tr><tr>${vt}</tr></table>
+   <div class="prow">
+     <div class="ppy"><div class="a"><small>1위 (최우선)</small><b>${T(0)}</b></div><div class="bb"><div><small>2위</small><b>${T(1)}</b></div><div><small>3위</small><b>${T(2)}</b></div></div></div>
+     <div style="flex:1"><div class="lbl">내가 1위 가치를 가장 중요하게 생각하는 이유 (내 삶의 경험과 연결하여)</div>${pl(blank?'':d.reason,4)}</div>
+   </div>
+   <h3>[STEP 2] 명사형 꿈에서 ‘동사형 비전’으로 전환하기</h3>
+   <p class="qq">“어떤 직업을 가질까?”(명사) 대신, “그 일을 통해 세상에 어떤 변화를 만들고 싶은가?”(동사)를 고민해 봅니다.</p>
+   <div class="decl">[기존의 명사형 생각] → “나는 ${ul(blank?'':d.noun,55)} (이)가 되고 싶다.”<br>
+   [새로운 동사형 선언] “나는 [세상의 문제/필요: ${ul(blank?'':d.problem,90)} ]를 해결하기 위해,<br>
+   [나의 핵심 가치: ${ul(blank?'':d.value,45)} ]를 바탕으로, [구체적 행동/기여: ${ul(blank?'':d.action,80)} ]하는 사람이 되고 싶다.”</div>
+   <div class="lbl">내가 관심을 두고 있는 사회적 문제나 타인의 어려움은 무엇인가요?</div>${pl(blank?'':d.concern,2)}
+   <div class="lbl">나는 사람들에게 어떤 긍정적인 감정이나 도움을 주는 사람으로 기억되고 싶나요?</div>${pl(blank?'':d.remember,2)}
+   <div class="pf"><span>성도고등학교 진로활동</span><span>[1 / 2 쪽]</span></div></div>`;
+  const p2=`<div class="pg">
+   <div class="ph"><b>10년 후의 나 & 지금의 다짐</b><span>[ 1학년 진로·창체 활동지 ]</span></div>
+   <h3>[STEP 3] 10년 후 27세의 내가 맞이할 ‘어느 하루’ 스케치</h3>
+   <p class="qq">10년 뒤의 평범하지만 보람찬 하루를 상상해 봅니다. 어떤 공간에서 누구와 무엇을 하며 가치를 실현하고 있나요?</p>
+   <div class="lbl">오전 (출근 및 시작하는 순간)</div>${pl(blank?'':d.am,2)}
+   <div class="lbl">오후 (몰입하여 가치를 실현하는 시간)</div>${pl(blank?'':d.pm,2)}
+   <div class="lbl">저녁 (하루를 마감하며 느끼는 보람)</div>${pl(blank?'':d.eve,2)}
+   <h3>[STEP 4] 미래의 나를 대변하는 ‘비전 명함’ 만들기</h3>
+   <div class="card">[나의 삶을 관통하는 한 줄 슬로건]<br>“ ${ul(blank?'':d.slogan,150)} ”<br>
+   성 명: ${ul(blank?'':(d.cardName||d.name),40)} &nbsp;&nbsp; 소속/활동 분야: ${ul(blank?'':d.field,75)}<br>
+   핵심 가치: [ ${ul(blank?'':d.cv1,35)} ] / [ ${ul(blank?'':d.cv2,35)} ]<br>
+   세상에 건네는 기여:<br>- ${ul(blank?'':d.give1,160)}<br>- ${ul(blank?'':d.give2,160)}</div>
+   <h3>[STEP 5] ‘그런 사람’이 되기 위한 고1 현재의 3대 실천 약속</h3>
+   <table class="pt">
+    <tr><td>1. 학업 & 과목 선택</td><td>2~3학년 때 깊이 있게 공부하고 싶은 과목/분야<br>${pl(blank?'':d.p1,2)}</td></tr>
+    <tr><td>2. 탐구 & 독서</td><td>내 가치관을 넓히기 위해 이번 학기에 읽을 책 1권 또는 탐구 주제<br>${pl(blank?'':d.p2,2)}</td></tr>
+    <tr><td>3. 학교생활 태도</td><td>오늘부터 당장 교실과 친구 관계에서 실천할 작은 행동 1가지<br>${pl(blank?'':d.p3,2)}</td></tr>
+   </table>
+   <h3>[정리] 그래서 나는, 이런 사람이 되고자 합니다</h3>
+   <div class="want"><div class="lbl">내가 되고 싶은 사람 (100자 이내, ‘~하는 사람이 되고자 함.’으로 끝맺기)</div>${pl(blank?'':d.want,2)}</div>
+   <div class="pf"><span>제작: 성도고 진로진학상담교사 정택 (2026)</span><span>[2 / 2 쪽]</span></div></div>`;
+  return p1+p2;
+}
+function printSheet(blank){$('#printArea').innerHTML=sheetHTML(S,blank);setTimeout(()=>window.print(),300)}
+
+/* ---------------- 전체 갱신 ---------------- */
+function refresh(){
+  renderGrid();renderTray();compass();renderVerb();yearLine();renderThemes();renderCard();renderPromise();recLen();wantCount();
+  if(cur===6)renderPoster();renderNav();
+}
+buildScenes();renderExamples();bindAll();go(0);
+</script>
+</body>
+</html>
